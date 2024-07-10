@@ -5,8 +5,8 @@ from datetime import datetime
 import os
 
 env.hosts = ['100.25.220.64', '100.26.233.66']
-env.user = 'ubuntu'
-env.key_filename = '~/.ssh/id_rsa'
+# env.user = 'ubuntu'
+# env.key_filename = '~/.ssh/id_rsa'
 
 def do_pack():
     """compress a webstatic folder into a .tgz"""
