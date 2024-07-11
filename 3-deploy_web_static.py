@@ -32,7 +32,7 @@ def do_deploy(archive_path):
         return False
     try:
         releases_path = "/data/web_static/releases/"
-        file_name = archive_path.split('/')[1]
+        file_name = os.path.basename(archive_path)
         file_name_no_ext = file_name.split(".")[0]
         current = "/data/web_static/current"
         put(archive_path, '/tmp/')
@@ -54,6 +54,3 @@ def deploy():
     if path is None:
         return False
     return do_deploy(path)
-
-
-

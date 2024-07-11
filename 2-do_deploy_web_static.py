@@ -28,12 +28,17 @@ def do_pack():
 @task
 def do_deploy(archive_path):
     """ deploy an archive to your web servers """
+    if not os.path.exists(archive_path):
+        return False
     try:
         releases_path = "/data/web_static/releases/"
-        file_name = archive_path.split('/')[1]
+        file_name = os.path.basename(archive_path)
         file_name_no_ext = file_name.split(".")[0]
         current = "/data/web_static/current"
-        put(archive_path, "/tmp/")
+
+        put(archive_path, '/tmp/')
+        run("rm -rf {}{}/".format(releases_path, file_name_no_ext))
+        run(f"mkdir -p {releases_path}")
         run(f"tar -xf /tmp/{file_name} -C {releases_path} && mv \
             {releases_path}web_static {releases_path}{file_name_no_ext}")
         run(f"rm '/tmp/{file_name}'")
@@ -43,3 +48,8 @@ def do_deploy(archive_path):
         return True
     except Exception:
         return False
+
+
+
+
+
