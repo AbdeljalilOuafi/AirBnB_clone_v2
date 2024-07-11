@@ -1,6 +1,4 @@
 #!/usr/bin/python3
-
-
 """ Fabric script for deploying web_static """
 
 from fabric.api import run, put, env, local
@@ -22,33 +20,6 @@ def do_pack():
         return path
     except Exception:
         return None
-
-
-""" def do_deploy(archive_path):
-    # deploy an archive to your web servers
-    if not os.path.exists(archive_path):
-        return False
-
-    try:
-        archive_name = archive_path.split('/')[-1]
-        put(archive_path, '/tmp/{}'.format(archive_name))
-
-        archive_base = archive_name.split('.')[0]
-        run('mkdir -p /data/web_static/releases/{}/'.format(archive_base))
-        run('tar -xzf /tmp/{} -C /data/web_static/releases/{}/'
-            .format(archive_name, archive_base))
-
-        run('rm /tmp/{}'.format(archive_name))
-
-        run('rm /data/web_static/current')
-
-        run('ln -s /data/web_static/releases/{}/ /data/web_static/current'
-            .format(archive_base))
-
-        return True
-    except Exception:
-        return False
-"""
 
 
 def do_deploy(archive_path):
