@@ -27,9 +27,7 @@ def do_pack():
 
 @task
 def do_deploy(archive_path):
-    """deploy"""
-    if not os.path.exists(archive_path):
-        return False
+    """ deploy an archive to your web servers """
     try:
         releases_path = "/data/web_static/releases/"
         file_name = archive_path.split('/')[1]
