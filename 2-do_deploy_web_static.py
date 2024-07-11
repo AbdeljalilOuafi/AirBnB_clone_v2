@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """a fabric script that compressed"""
-from fabric.api import local, put, run, env, task
+from fabric.api import local, put, run, task, sudo, env
 from fabric.contrib.files import exists
 from datetime import datetime
 import os
@@ -33,19 +33,20 @@ def do_deploy(archive_path):
         current = "/data/web_static/current"
 
         put(archive_path, '/tmp/')
-        if not exists(releases_path):  # if the path dosen't exist create it
-            run(f"sudo mkdir -p {releases_path}")
-            run(f"sudo mkdir -p /data/web_static/shared/")
-        run(f"sudo tar -xf /tmp/{file_name} -C {releases_path} && sudo mv \
+        # check if the path dosen't exist, it must be created
+        if not exists(releases_path):
+            sudo(f"mkdir -p {releases_path}")
+            sudo(f"mkdir -p /data/web_static/shared/")
+        sudo(f"tar -xf /tmp/{file_name} -C {releases_path} && sudo mv \
             {releases_path}web_static {releases_path}{file_name_no_ext}")
         run(f"rm '/tmp/{file_name}'")
 
         # checks if "current" exists on the server before attempting to delete
         if exists(current):
-            run(f"sudo rm {current}")
+            sudo(f"rm {current}")
         else:
             pass
-        run(f"sudo ln -s {releases_path}{file_name_no_ext} {current}")
+        sudo(f"ln -s {releases_path}{file_name_no_ext} {current}")
         print("New version deployed!")
         return True
     except Exception:
