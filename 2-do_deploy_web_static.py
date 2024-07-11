@@ -37,7 +37,7 @@ def do_deploy(archive_path):
         if not exists(releases_path):
             sudo(f"mkdir -p {releases_path}")
             sudo(f"mkdir -p /data/web_static/shared/")
-        sudo(f"tar -xf /tmp/{file_name} -C {releases_path} && sudo mv \
+        sudo(f"tar -xzf /tmp/{file_name} -C {releases_path} && sudo mv \
             {releases_path}web_static {releases_path}{file_name_no_ext}")
         run(f"rm '/tmp/{file_name}'")
 
