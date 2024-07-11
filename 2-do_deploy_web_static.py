@@ -6,8 +6,6 @@ from datetime import datetime
 import os
 
 env.hosts = ['100.25.220.64', '100.26.233.66']
-env.user = 'ubuntu'
-env.key_filename = '~/.ssh/id_rsa'
 
 
 @task
@@ -35,10 +33,14 @@ def do_deploy(archive_path):
         current = "/data/web_static/current"
 
         put(archive_path, '/tmp/')
-        run(f"sudo mkdir -p {releases_path}")
+        if not exists(releases_path):  # if the path dosen't exist create it
+            run(f"sudo mkdir -p {releases_path}")
+            run(f"sudo mkdir -p /data/web_static/shared/")
         run(f"sudo tar -xf /tmp/{file_name} -C {releases_path} && sudo mv \
             {releases_path}web_static {releases_path}{file_name_no_ext}")
         run(f"rm '/tmp/{file_name}'")
+
+        # checks if "current" exists on the server before attempting to delete
         if exists(current):
             run(f"sudo rm {current}")
         else:
