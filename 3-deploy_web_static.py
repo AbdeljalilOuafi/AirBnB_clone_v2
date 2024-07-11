@@ -35,7 +35,7 @@ def do_deploy(archive_path):
         file_name = archive_path.split('/')[1]
         file_name_no_ext = file_name.split(".")[0]
         current = "/data/web_static/current"
-        put(archive_path, '/tmp/{}'.format(archive_name))
+        put(archive_path, '/tmp/{}'.format(file_name))
         run(f"tar -xf /tmp/{file_name} -C {releases_path} && mv \
             {releases_path}web_static {releases_path}{file_name_no_ext}")
         run(f"rm '/tmp/{file_name}'")
