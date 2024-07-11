@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """a fabric script that compressed"""
-from fabric.api import local, put, run, env
+from fabric.api import local, put, run, env, task
 from datetime import datetime
 import os
 
@@ -8,6 +8,7 @@ env.hosts = ['100.25.220.64', '100.26.233.66']
 # env.user = 'ubuntu'
 # env.key_filename = '~/.ssh/id_rsa'
 
+@task
 def do_pack():
     """compress a webstatic folder into a .tgz"""
     local("mkdir -p versions")
@@ -22,6 +23,7 @@ def do_pack():
     else:
         return None
 
+@task
 def do_deploy(archive_path):
     """deploy"""
     if not os.path.exists(archive_path):
