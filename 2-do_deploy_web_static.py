@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """ Fabric script for deploying web_static """
 
 from fabric.api import run, put, env, local
@@ -6,9 +7,8 @@ from os.path import exists
 from datetime import datetime
 import os
 
-env.hosts = ['100.25.220.64', '100.26.233.66']
+env.hosts = ['100.26.250.129', '54.210.53.36']
 env.user = 'ubuntu'
-env.key_filename = '~/.ssh/id_rsa'
 
 
 def do_pack():
