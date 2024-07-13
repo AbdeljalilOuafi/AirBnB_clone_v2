@@ -7,7 +7,7 @@ from os.path import exists
 from datetime import datetime
 import os
 
-env.hosts = ['100.25.220.64', '100.26.233.66']
+env.hosts = ['54.90.5.69', '100.26.235.114']
 env.user = 'ubuntu'
 
 

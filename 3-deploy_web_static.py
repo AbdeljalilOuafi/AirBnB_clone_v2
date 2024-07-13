@@ -1,13 +1,14 @@
 #!/usr/bin/python3
-"""a fabric script that compressed"""
-from fabric.api import local, put, run, env, task
-from datetime import datetime
+""" Fabric script for deploying web_static """
+
+from fabric.api import run, put, env, local
 from os.path import exists
+from datetime import datetime
 import os
 
-env.hosts = ['100.25.220.64', '100.26.233.66']
+env.hosts = ['54.90.5.69', '100.26.235.114']
 env.user = 'ubuntu'
-env.key_filename = '~/.ssh/id_rsa'
+
 
 
 def do_pack():
@@ -23,29 +24,30 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """distributes an archive to the web servers"""
+    """deploy web static with fabric"""
     if exists(archive_path) is False:
         return False
+
     try:
-        file_name = archive_path.split("/")[-1]
-        no_ext = file_name.split(".")[0]
+        filename = archive_path.split("/")[-1]
+        no_excep = filename.split(".")[0]
         path = "/data/web_static/releases/"
         put(archive_path, '/tmp/')
-        run('mkdir -p {}{}/'.format(path, no_ext))
-        run('tar -xzf /tmp/{} -C {}{}/'.format(file_name, path, no_ext))
-        run('rm /tmp/{}'.format(file_name))
-        run('mv {0}{1}/web_static/* {0}{1}/'.format(path, no_ext))
-        run('rm -rf {}{}/web_static'.format(path, no_ext))
-        run('rm -rf /data/web_static/current')
-        run('ln -s {}{}/ /data/web_static/current'.format(path, no_ext))
+        run('sudo mkdir -p {}{}/'.format(path, no_excep))
+        run('sudo tar -xzf /tmp/{} -C {}{}/'.format(filename, path, no_excep))
+        run('sudo rm /tmp/{}'.format(filename))
+        run('sudo mv {0}{1}/web_static/* {0}{1}/'.format(path, no_excep))
+        run('sudo rm -rf {}{}/web_static'.format(path, no_excep))
+        run('sudo rm -rf /data/web_static/current')
+        run('sudo ln -s {}{}/ /data/web_static/current'.format(path, no_excep))
         return True
-    except Exception:
+    except BaseException:
         return False
 
 
 def deploy():
-    """ deploy an archive to your web servers """
-    path = do_pack()
-    if path is None:
+    """ do path an do deploy"""
+    archive_path = do_pack()
+    if archive_path is None:
         return False
-    return do_deploy(path)
+    return do_deploy(archive_path)
