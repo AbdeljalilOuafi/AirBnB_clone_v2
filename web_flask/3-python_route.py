@@ -27,6 +27,7 @@ def display_c(text):
 @app.route("/python/", defaults={"text": "is cool"})
 @app.route("/python/<text>")
 def display_python(text):
+    text = text.replace("_", " ")
     return f"Python {text}"
 
 
