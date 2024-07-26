@@ -84,5 +84,3 @@ class DBStorage:
         """close the session"""
         if self.__session:
             self.__session.close()
-
-
