@@ -1,16 +1,40 @@
 {
-    "State.84c19529-f1a3-4e34-ad3c-c25ec15eacb0": {
-        "id": "84c19529-f1a3-4e34-ad3c-c25ec15eacb0",
-        "created_at": "2024-06-24T18:45:25.554153",
-        "updated_at": "2024-06-24T18:45:25.554229",
+    "State.52197200-1dcc-4fa7-867c-0fbc81b85464": {
+        "id": "52197200-1dcc-4fa7-867c-0fbc81b85464",
+        "created_at": "2024-07-26T11:36:17.522912",
+        "updated_at": "2024-07-26T11:36:17.524651",
         "name": "California",
         "__class__": "State"
     },
-    "State.359f4570-9921-4f41-9cc6-eb778eecef5a": {
-        "id": "359f4570-9921-4f41-9cc6-eb778eecef5a",
-        "created_at": "2024-06-24T18:46:19.100540",
-        "updated_at": "2024-06-24T18:46:19.100600",
-        "name": "California",
+    "State.5f303ae7-d851-4eb9-a032-b573924971c5": {
+        "id": "5f303ae7-d851-4eb9-a032-b573924971c5",
+        "created_at": "2024-07-26T11:36:17.550922",
+        "updated_at": "2024-07-26T11:36:17.552748",
+        "name": "Arizona",
         "__class__": "State"
+    },
+    "City.f9ce1ee6-a9e9-4596-af6c-eec14e98410f": {
+        "id": "f9ce1ee6-a9e9-4596-af6c-eec14e98410f",
+        "created_at": "2024-07-26T11:36:17.555000",
+        "updated_at": "2024-07-26T11:36:17.571826",
+        "state_id": "52197200-1dcc-4fa7-867c-0fbc81b85464",
+        "name": "Napa",
+        "__class__": "City"
+    },
+    "City.f4050be4-6445-4be2-97f6-fe6c7e1f8043": {
+        "id": "f4050be4-6445-4be2-97f6-fe6c7e1f8043",
+        "created_at": "2024-07-26T11:36:17.607410",
+        "updated_at": "2024-07-26T11:36:17.607579",
+        "state_id": "52197200-1dcc-4fa7-867c-0fbc81b85464",
+        "name": "Sonoma",
+        "__class__": "City"
+    },
+    "City.abb59152-8b1f-4d6e-94df-3366f826cc70": {
+        "id": "abb59152-8b1f-4d6e-94df-3366f826cc70",
+        "created_at": "2024-07-26T11:36:17.609217",
+        "updated_at": "2024-07-26T11:36:17.609400",
+        "state_id": "5f303ae7-d851-4eb9-a032-b573924971c5",
+        "name": "Page",
+        "__class__": "City"
     }
 }
