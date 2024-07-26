@@ -57,7 +57,7 @@ def states_list():
 
 
 @app.teardown_appcontext
-def close(error):
+def close():
     """ def doc """
     storage.close()
 
