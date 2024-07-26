@@ -2,9 +2,6 @@
 """This module instantiates an object of class FileStorage"""
 from os import getenv
 
-# print(getenv('HBNB_TYPE_STORAGE'))
-# print(getenv('HBNB_MYSQL_USER'))
-
 if getenv('HBNB_TYPE_STORAGE') == 'db':
     from models.engine.db_storage import DBStorage
     # print("Using DABABASE...")
