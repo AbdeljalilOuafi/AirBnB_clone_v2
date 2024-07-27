@@ -1,20 +1,26 @@
 #!/usr/bin/python3
+
+#!/usr/bin/python3
 """
 starts a Flask web application
 """
 
 from flask import Flask, render_template
+from models import *
 from models.state import State
+from models.amenity import Amenity
 from models import storage
-
 app = Flask(__name__)
 
 
-@app.route('/cities_by_states', strict_slashes=False)
-def city_by_state():
+@app.route('/hbnb_filters', strict_slashes=False)
+def states_and_amenities():
     """display the states and cities listed in alphabetical order"""
     states = storage.all(State).values()
-    return render_template('8-cities_by_states.html', states=states)
+    amenities = storage.all(Amenity).values()
+    print(states)
+    print(amenities)
+    return render_template('10-hbnb_filters.html', states=states, amenities=amenities)
 
 
 @app.teardown_appcontext
