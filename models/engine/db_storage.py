@@ -39,27 +39,59 @@ class DBStorage:
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
-    def all(self, cls=None):
-        """query on the current database session"""
-        obj_list = []
-        if cls:
-            if isinstance(cls, str):
-                try:
-                    cls = globals()[cls]
-                except KeyError:
-                    pass
-            if issubclass(cls, Base):
-                obj_list = self.__session.query(cls).all()
+    # def all(self, cls=None):
+    #     """query on the current database session"""
+    #     obj_list = []
+    #     if cls:
+    #         if isinstance(cls, str):
+    #             try:
+    #                 cls = globals()[cls]
+    #             except KeyError:
+    #                 pass
+    #         if issubclass(cls, Base):
+    #             obj_list = self.__session.query(cls).all()
+    #     else:
+    #         for subclass in Base.__subclasses__():
+    #             obj_list.extend(self.__session.query(subclass).all())
+
+    #     obj_dict = dict()
+    #     for obj in obj_list:
+    #         key = "{}.{}".format(obj.__class__.__name__, obj.id)
+    #         obj_dict[key] = obj
+    #     return obj_dict
+    def all(self, cls=None, id=None):
+        """
+        Query all classes or specific one by ID
+        """
+        allClasses = [User, Place, State, City, Amenity, Review]
+        result = {}
+
+        if cls is not None:
+            if id is not None:
+                obj = self.__session.query(cls).get(id)
+                if obj is not None:
+                    ClassName = obj.__class__.__name__
+                    keyName = ClassName + "." + str(obj.id)
+                    result[keyName] = obj
+            else:
+                for obj in self.__session.query(cls).all():
+                    ClassName = obj.__class__.__name__
+                    keyName = ClassName + "." + str(obj.id)
+                    result[keyName] = obj
         else:
-            for subclass in Base.__subclasses__():
-                obj_list.extend(self.__session.query(subclass).all())
-
-        obj_dict = dict()
-        for obj in obj_list:
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            obj_dict[key] = obj
-        return obj_dict
-
+            for clss in allClasses:
+                if id is not None:
+                    obj = self.__session.query(clss).get(id)
+                    if obj is not None:
+                        ClassName = obj.__class__.__name__
+                        keyName = ClassName + "." + str(obj.id)
+                        result[keyName] = obj
+                else:
+                    for obj in self.__session.query(clss).all():
+                        ClassName = obj.__class__.__name__
+                        keyName = ClassName + "." + str(obj.id)
+                        result[keyName] = obj
+        return result
 
     def new(self, obj):
         """add the object to the current database session"""
